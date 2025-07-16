@@ -11,6 +11,11 @@ RUN apt-get update -qq && \
       postgresql-client \
       yarn \
       git \
+      python3 \
+      python3-pip \
+      python3-setuptools \
+      make \
+      gcc \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Clona seu repositório
@@ -22,7 +27,7 @@ WORKDIR /app
 RUN gem install bundler:2.4.22
 
 # Instala dependências JS
-RUN yarn install
+RUN yarn install || { cat yarn-error.log; exit 1; }
 
 # Copia o start.sh (caso queira customizar)
 COPY --chmod=755 start.sh ./
