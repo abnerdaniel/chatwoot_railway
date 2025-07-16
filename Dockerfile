@@ -7,7 +7,6 @@ RUN apt-get update -qq && \
       build-essential \
       libpq-dev \
       libvips \
-      nodejs \
       postgresql-client \
       yarn \
       git \
