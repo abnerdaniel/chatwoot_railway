@@ -1,37 +1,10 @@
-# https://hub.docker.com/r/chatwoot/chatwoot/tags
-FROM ruby:3.1-slim
+# https://hub.docker.com/r/adoabreu/chatwoot/tags
+FROM adoabreu/chatwoot:latest
 
-# Instala dependências do sistema
-RUN apt-get update -qq && \
-    apt-get install -y --no-install-recommends \
-      build-essential \
-      libpq-dev \
-      libvips \
-      postgresql-client \
-      yarn \
-      git \
-      python3 \
-      python3-pip \
-      python3-setuptools \
-      make \
-      gcc \
-      nodejs \
-      npm \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apk add --no-cache multirun postgresql-client
 
-# Clona seu repositório
-RUN git clone https://github.com/abnerdaniel/chatwoot.git /app
-
-WORKDIR /app
-
-# Instala gems
-RUN gem install bundler:2.4.22
-
-# Instala dependências JS
-RUN yarn install || { cat yarn-error.log; exit 1; }
-
-# Copia o start.sh (caso queira customizar)
 COPY --chmod=755 start.sh ./
 
 ENTRYPOINT ["/bin/sh"]
+
 CMD ["start.sh"]
