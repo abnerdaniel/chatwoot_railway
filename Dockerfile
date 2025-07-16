@@ -18,6 +18,10 @@ RUN apt-get update -qq && \
       gcc \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
+# Instala Node.js 18.x
+RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs
+
 # Clona seu repositório
 RUN git clone https://github.com/abnerdaniel/chatwoot.git /app
 
