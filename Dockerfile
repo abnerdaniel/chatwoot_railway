@@ -1,4 +1,4 @@
-F# https://hub.docker.com/r/chatwoot/chatwoot/tags
+# https://hub.docker.com/r/chatwoot/chatwoot/tags
 FROM ruby:3.1
 
 # Instala dependências do sistema
